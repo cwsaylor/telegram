@@ -1,0 +1,15 @@
+%h2 New Post
+%form{ :action => '/posts/create', :method => 'post' }
+  %label{ :for => 'post_title' } Title:
+  %input{ :type => 'text', :name => 'post[title]', :id => 'post_title' }
+  %label{ :for => 'post_content' } Content:
+  %textarea{ :rows => '20', :cols => '80', :name => 'post[content]', :id => 'post_content' }  
+  %label{ :for => 'post_permalink' } Permalink:
+  %input{ :type => 'text', :name => 'post[permalink]', :id => 'post_permalink' }
+  %label{ :for => 'post_summary' } Summary:
+  %input{ :type => 'text', :name => 'post[summary]', :id => 'post_summary' }
+  %label{ :for => 'post_keywords' } Keywords:
+  %input{ :type => 'text', :name => 'post[keywords]', :id => 'post_keywords' }
+  %label{ :for => 'post_published' } Published:
+  %input{ :type => 'checkbox', :name => 'post[published]', :id => 'post_published', :value => '1' }
+  %input{ :type => 'submit', :name => 'Create', :value => 'Create' }

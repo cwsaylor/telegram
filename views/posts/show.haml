@@ -1,0 +1,7 @@
+%h2= @post.title
+%p.summary= @post.summary
+:markdown
+  #{@post.content}
+.admin
+  %a{:href => "/posts/#{@post.id}/edit"} Edit
+  

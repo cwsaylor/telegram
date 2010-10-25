@@ -1,0 +1,11 @@
+development:
+  host: localhost
+  database: telegram
+
+test:
+  host: localhost
+  database: telegram_test
+
+production:
+  <<: *defaults
+  uri: <%= ENV['MONGOHQ_URL'] %>

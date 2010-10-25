@@ -1,0 +1,16 @@
+%h2 Edit Post
+%form{ :action => "/posts/#{@post.id}", :method => 'post' }
+  %input{ :type => 'hidden', :name => '_method', :value => 'put' }
+  %label{ :for => 'post_title' } Title:
+  %input{ :type => 'text', :name => 'post[title]', :id => 'post_title', :value => "#{@post.title.to_s}" }
+  %label{ :for => 'post_content' } Content:
+  %textarea{ :rows => '20', :cols => '80', :name => 'post[content]', :id => 'post_content', :value => "#{@post.content.to_s}" }  
+  %label{ :for => 'post_permalink' } Permalink:
+  %input{ :type => 'text', :name => 'post[permalink]', :id => 'post_permalink', :value => "#{@post.permalink.to_s}" }
+  %label{ :for => 'post_summary' } Summary:
+  %input{ :type => 'text', :name => 'post[summary]', :id => 'post_summary', :value => "#{@post.summary.to_s}" }
+  %label{ :for => 'post_keywords' } Keywords:
+  %input{ :type => 'text', :name => 'post[keywords]', :id => 'post_keywords', :value => "#{@post.keywords.to_s}" }
+  %input{ :type => 'checkbox', :name => 'post[published]', :id => 'post_published', :value => "1", :checked => @post.published }
+  %label{ :for => 'post_published' } Published:
+  %input{ :type => 'submit', :name => 'Update', :value => 'Update' }
