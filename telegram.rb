@@ -69,7 +69,7 @@ end
 
 delete '/posts/:id' do
   @post = Post.find(params[:id])
-  @post.delete(params[:post])
+  @post.delete
   redirect '/'
 end
 

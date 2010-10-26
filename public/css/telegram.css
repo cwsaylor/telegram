@@ -54,6 +54,18 @@ table {
 	border-spacing: 0;
 }
 
+form.delete {
+  display: inline;
+}
+
+form.delete button{
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  text-decoration: underline;
+  color: blue;
+}
+
 input[type="text"] {
   width: 99%;
   display: block;
