@@ -1,0 +1,8 @@
+%h2 Edit Settings
+%form{ :action => "/settings", :method => 'post' }
+  %input{ :type => 'hidden', :name => '_method', :value => 'put' }
+  %label{ :for => 'setting_username' } User Name:
+  %input{ :type => 'text', :name => 'setting[username]', :id => 'setting_username', :value => "#{@settings.username.to_s}" }
+  %label{ :for => 'setting_password' } Password:
+  %input{ :type => 'text', :name => 'setting[password]', :id => 'setting_password', :value => "#{@settings.password.to_s}" }
+  %input{ :type => 'submit', :name => 'Save', :value => 'Save' }
