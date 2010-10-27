@@ -5,4 +5,12 @@
   %input{ :type => 'text', :name => 'setting[username]', :id => 'setting_username', :value => "#{@settings.username.to_s}" }
   %label{ :for => 'setting_password' } Password:
   %input{ :type => 'text', :name => 'setting[password]', :id => 'setting_password', :value => "#{@settings.password.to_s}" }
+  %label{ :for => 'setting_feed_url' } Feed URL (Default: #{default_feed_url}):
+  %input{ :type => 'text', :name => 'setting[feed_url]', :id => 'setting_feed_url', :value => "#{@settings.feed_url.to_s}" }
+  %label{ :for => 'setting_template_layout' } Layout Template:
+  %textarea{ :rows => '10', :cols => '80', :name => 'setting[template_layout]', :id => 'setting_template_layout' }  #{@settings.template_layout.to_s}
+  %label{ :for => 'setting_template_index' } Index Template:
+  %textarea{ :rows => '10', :cols => '80', :name => 'setting[template_index]', :id => 'setting_template_index' }  #{@settings.template_index.to_s}
+  %label{ :for => 'setting_template_post' } Post Template:
+  %textarea{ :rows => '10', :cols => '80', :name => 'setting[template_post]', :id => 'setting_template_post' }  #{@settings.template_post.to_s}
   %input{ :type => 'submit', :name => 'Save', :value => 'Save' }

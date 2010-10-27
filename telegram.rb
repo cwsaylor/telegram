@@ -6,7 +6,6 @@ enable :sessions
 configure do
   mongoid_config = File.join(File.dirname(__FILE__), "config", "mongoid.yml")
   mongoid_settings = YAML.load(ERB.new(File.new(mongoid_config).read).result)
-
   Mongoid.configure do |config|
     config.from_hash(mongoid_settings[ENV['RACK_ENV']])
   end
@@ -15,6 +14,7 @@ end
 class Post
   include Mongoid::Document
   include Mongoid::Timestamps
+  
   field :title
   field :permalink
   field :summary
@@ -44,9 +44,14 @@ end
 
 class Setting
   include Mongoid::Document
-  field :username, :default => 'admin'
-  field :password, :default => 'change_me'
-  field :author, :default => 'Me'
+  
+  field :username,        :default => 'admin'
+  field :password,        :default => 'change_me'
+  field :author,          :default => 'Me'
+  field :feed_url
+  field :template_layout, :default => IO.read(File.dirname(__FILE__)+'/templates/layout.haml')
+  field :template_index,  :default => IO.read(File.dirname(__FILE__)+'/templates/index.haml')
+  field :template_post,   :default => IO.read(File.dirname(__FILE__)+'/templates/post.haml')
 end
 
 helpers do
@@ -68,19 +73,30 @@ helpers do
   
   def base_url
     if request.port == 80
-      "#{request.scheme}://#{request.host}/"
+      "http://#{request.host}/"
     else
-      "#{request.scheme}://#{request.host}:#{request.port}/"
+      "http://#{request.host}:#{request.port}/"
     end
   end
   
   def post_url(post)
     "#{base_url}#{post.permalink}"
   end
+  
+  def default_feed_url
+    "#{base_url}feed.atom"
+  end
+  
+  def feed_url
+    @settings.feed_url.nil? ? default_feed_url : @settings.feed_url
+  end
 end
 
 before do
   @settings = Setting.first || Setting.create!
+  template :layout do
+    @settings.template_layout.to_s
+  end
 end
 
 before '/posts/*' do
@@ -94,7 +110,7 @@ end
 get '/' do
   response.headers['Cache-Control'] = 'public, max-age=300'
   @posts = Post.where(:published => true).desc(:published_at)
-  haml :index
+  haml @settings.template_index.to_s
 end
 
 get '/feed.atom' do
@@ -104,9 +120,11 @@ get '/feed.atom' do
   builder :feed
 end
 
+# Post Editing
+
 get '/posts/drafts' do
   @posts = Post.where(:published => false).asc(:created_at)
-  haml :index
+  haml :'posts/drafts'
 end
 
 get '/posts/new' do
@@ -147,7 +165,6 @@ end
 # Settings
 
 get '/settings' do
-  # @settings = Setting.first
   haml :'settings/index'
 end
 
@@ -165,5 +182,5 @@ end
 get '/:permalink' do
   response.headers['Cache-Control'] = 'public, max-age=300'
   @post = Post.first(:conditions => {:permalink => params[:permalink]})
-  haml :'posts/show'
+  haml @settings.template_post.to_s
 end

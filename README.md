@@ -14,9 +14,17 @@ Features
 * Single author
 * Pretty permalinks
 * Authentication through Basic HTTP Auth
-* Admin encrypted using Heroku's free Piggyback SSL support
 * Update templates and CSS through the admin
+
+Planned Features
+----------------
+* Admin encrypted using Heroku's free Piggyback SSL support
 * iPhone/iPad interface
+
+Warning
+-------
+Templates are currently being rendered directly from the database so don't
+allow access to your admin by someone you don't trust.
 
 Requirements
 ------------

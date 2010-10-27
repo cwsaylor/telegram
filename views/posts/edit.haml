@@ -4,7 +4,7 @@
   %label{ :for => 'post_title' } Title:
   %input{ :type => 'text', :name => 'post[title]', :id => 'post_title', :value => "#{@post.title.to_s}" }
   %label{ :for => 'post_content' } Content:
-  %textarea{ :rows => '20', :cols => '80', :name => 'post[content]', :id => 'post_content', :value => "#{@post.content.to_s}" }  
+  %textarea{ :rows => '20', :cols => '80', :name => 'post[content]', :id => 'post_content' } #{@post.content.to_s}
   %label{ :for => 'post_permalink' } Permalink:
   %input{ :type => 'text', :name => 'post[permalink]', :id => 'post_permalink', :value => "#{@post.permalink.to_s}" }
   %label{ :for => 'post_summary' } Summary:

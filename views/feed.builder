@@ -5,7 +5,7 @@ xml.feed :'xml:lang' => 'en-US', :xmlns => 'http://www.w3.org/2005/Atom' do
            :href => base_url, 
            :rel => 'alternate'
   xml.link :type => 'application/atom+xml', 
-           :href => base_url + "feed.atom", 
+           :href => feed_url, 
            :rel => 'self'
   xml.title 'Telegram CMS'
   xml.updated(rfc_3339(@posts.first.published_at))
