@@ -28,6 +28,9 @@ class Post
   before_save :ensure_permalink
   before_save :set_published
   
+  validates_presence_of   :title
+  validates_uniqueness_of :permalink
+  
   def ensure_permalink
     permalink = self.permalink.blank? ? self.title : self.permalink
     permalink = I18n.transliterate(ActiveSupport::Multibyte::Unicode.normalize(ActiveSupport::Multibyte::Unicode.tidy_bytes(permalink), :c), :replacement => "-")

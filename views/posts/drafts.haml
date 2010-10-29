@@ -1,5 +1,5 @@
 - @posts.each do |post|
   .post
     %h2
-      %a{:href => "/#{post.permalink}"} #{post.title}
+      %a{:href => "/posts/#{post.id}/edit"} #{post.title}
     %p.summary= post.summary
