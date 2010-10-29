@@ -1,12 +1,21 @@
+:javascript
+  function confirmDelete(){
+    var agree=confirm("Are you sure you want to delete this post?");
+    if (agree)
+      return true;
+    else
+      return false;
+  }
+ 
 #admin
   .row
     .column.grid_12
       %a{ :href => '/', :title => 'Home' } Home
       %a{ :href => '/posts/drafts', :title => 'Drafts' } Drafts
       %a{ :href => '/posts/new', :title => 'New Post' } New Post
-      - unless @post.blank?
-        %a{:href => "/posts/#{@post.id}/edit"} Edit Post
+      - if ! @post.blank? && ! @post.new_record?
+        %a{:href => "/posts/#{@post.id}/edit" } Edit Post
         %form{ :action => "/posts/#{@post.id}", :method => 'post', :class => "delete" }
           %input{ :type => 'hidden', :name => '_method', :value => 'delete' }
-          %button{ :type => 'submit'} Delete Post
+          %button{ :type => 'submit', :onClick => "return confirmDelete();" } Delete Post
       %a{ :href => '/settings', :title => 'Settings' } Settings
