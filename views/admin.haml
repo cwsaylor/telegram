@@ -1,0 +1,12 @@
+#admin
+  .row
+    .column.grid_12
+      %a{ :href => '/', :title => 'Home' } Home
+      %a{ :href => '/posts/drafts', :title => 'Drafts' } Drafts
+      %a{ :href => '/posts/new', :title => 'New Post' } New Post
+      - unless @post.blank?
+        %a{:href => "/posts/#{@post.id}/edit"} Edit Post
+        %form{ :action => "/posts/#{@post.id}", :method => 'post', :class => "delete" }
+          %input{ :type => 'hidden', :name => '_method', :value => 'delete' }
+          %button{ :type => 'submit'} Delete Post
+      %a{ :href => '/settings', :title => 'Settings' } Settings

@@ -2,8 +2,3 @@
 %p.summary= @post.summary
 :markdown
   #{@post.content}
-.admin
-  %a{:href => "/posts/#{@post.id}/edit"} Edit
-  %form{ :action => "/posts/#{@post.id}", :method => 'post', :class => "delete" }
-    %input{ :type => 'hidden', :name => '_method', :value => 'delete' }
-    %button{ :type => 'submit'} Delete

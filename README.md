@@ -9,12 +9,13 @@ Features
 --------
 
 * Posts
+* Markdown
 * Drafts
 * Atom Feed
 * Single author
 * Pretty permalinks
 * Authentication through Basic HTTP Auth
-* Update templates and CSS through the admin
+* Update Haml templates and CSS through the admin
 
 Planned Features
 ----------------

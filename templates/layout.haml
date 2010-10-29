@@ -1,23 +1,18 @@
 !!! 5
 %html{ :lang => "en"}
   %head
-    %title== Telegram CMS
+    %title= @settings.site_name.to_s
     %meta{ :charset => 'utf-8' }
     %meta{ :name => 'description', :content => "" }
-    %link{ :rel => 'stylesheet', :href => '/css/telegram.css' }
-    %link{ :rel => "alternate",  :type => "application/atom+xml", :title="Atom Feed", :href => "#{feed_url}" }
+    %link{ :rel => 'stylesheet', :href => '/application.css' }
+    %script{ :type => 'text/javascript', :charset => 'utf-8', :src => '/application.js' }
+    %link{ :rel => "alternate",  :type => "application/atom+xml", :title => "#{@settings.site_name.to_s} Atom Feed", :href => "#{feed_url}" }
   %body
-    #menu.admin
-      .row
-        .column.grid_12
-          %a{ :href => '/', :title => 'Home' } Home
-          %a{ :href => '/posts/drafts', :title => 'Drafts' } Drafts
-          %a{ :href => '/posts/new', :title => 'New Post' } New Post
-          %a{ :href => '/settings', :title => 'Settings' } Settings
+    = haml :admin, :layout => false
     #header
       .row
         .column.grid_12
-          %h1 Telegram CMS
+          %h1= @settings.site_name.to_s
     #content
       .row
         .column.grid_12
@@ -25,4 +20,4 @@
     #footer
       .row
         .column.grid_12
-          %p &copy; 2010 Telegram CMS
+          %p= "&copy; 2010 #{@settings.site_name.to_s}"

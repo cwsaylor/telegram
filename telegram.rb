@@ -11,6 +11,8 @@ configure do
   end
 end
 
+# Models
+
 class Post
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -36,8 +38,10 @@ class Post
   end
   
   def set_published
-    if self.attribute_changed?("published") && self.published_at.nil?
-      self.published_at = Time.now
+    if self.published?
+      self.published_at = Time.now if self.published_at.blank?
+    else
+      self.published_at = nil
     end
   end
 end
@@ -45,14 +49,27 @@ end
 class Setting
   include Mongoid::Document
   
+  field :site_name,       :default => 'Telegram CMS'
   field :username,        :default => 'admin'
   field :password,        :default => 'change_me'
   field :author,          :default => 'Me'
   field :feed_url
-  field :template_layout, :default => IO.read(File.dirname(__FILE__)+'/templates/layout.haml')
-  field :template_index,  :default => IO.read(File.dirname(__FILE__)+'/templates/index.haml')
-  field :template_post,   :default => IO.read(File.dirname(__FILE__)+'/templates/post.haml')
-end
+  field :template_layout
+  field :template_index
+  field :template_post
+  field :template_css
+  field :template_js
+  
+  before_save :ensure_templates
+  
+  def ensure_templates
+    self.template_layout = IO.read(File.dirname(__FILE__)+'/templates/layout.haml') if self.template_layout.blank?
+    self.template_index  = IO.read(File.dirname(__FILE__)+'/templates/index.haml') if self.template_index.blank?
+    self.template_post   = IO.read(File.dirname(__FILE__)+'/templates/post.haml') if self.template_post.blank?
+    self.template_css    = IO.read(File.dirname(__FILE__)+'/templates/application.css') if self.template_css.blank?
+    self.template_js     = IO.read(File.dirname(__FILE__)+'/templates/application.js') if self.template_js.blank?
+  end
+end 
 
 helpers do
   def protected!
@@ -84,11 +101,19 @@ helpers do
   end
   
   def default_feed_url
-    "#{base_url}feed.atom"
+    "#{base_url}feed"
   end
   
   def feed_url
-    @settings.feed_url.nil? ? default_feed_url : @settings.feed_url
+    @settings.feed_url.blank? ? default_feed_url : @settings.feed_url
+  end
+  
+  def convert_md(content)
+    markdown(content)
+  end
+  
+  def cache_me
+    response.headers['Cache-Control'] = 'public, max-age=300'
   end
 end
 
@@ -108,16 +133,29 @@ before '/settings' do
 end
 
 get '/' do
-  response.headers['Cache-Control'] = 'public, max-age=300'
+  cache_me
   @posts = Post.where(:published => true).desc(:published_at)
   haml @settings.template_index.to_s
 end
 
-get '/feed.atom' do
+get '/feed' do
+  cache_me
   @posts = Post.where(:published => true).desc(:published_at)
-  last_modified @posts.first.published_at  
-  content_type 'application/atom+xml', :charset => 'utf-8'
-  builder :feed
+  last_modified @posts.first.published_at rescue Time.now
+  content_type :atom, :charset => 'utf-8'
+  builder :feed, :layout => false
+end
+
+get '/application.js' do
+  cache_me
+  content_type :js, :charset => 'utf-8'
+  @settings.template_js.to_s
+end
+
+get '/application.css' do
+  cache_me
+  content_type :css, :charset => 'utf-8'
+  @settings.template_css.to_s
 end
 
 # Post Editing
@@ -157,8 +195,8 @@ put '/posts/:id' do
 end
 
 delete '/posts/:id' do
-  @post = Post.find(params[:id]).asc(:id)
-  @post.delete
+  @post = Post.find(params[:id])
+  @post.destroy
   redirect '/'
 end
 
@@ -171,7 +209,7 @@ end
 put '/settings' do
   @settings = Setting.first
   if @settings.update_attributes(params[:setting])
-    redirect '/'
+    redirect '/settings'
   else
     haml :'settings/index'
   end
@@ -180,7 +218,7 @@ end
 # This one must be last to get the really short url's
 
 get '/:permalink' do
-  response.headers['Cache-Control'] = 'public, max-age=300'
+  cache_me
   @post = Post.first(:conditions => {:permalink => params[:permalink]})
   haml @settings.template_post.to_s
 end
