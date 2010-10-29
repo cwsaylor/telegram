@@ -23,7 +23,7 @@ class Post
   field :keywords
   field :content
   field :published_at, :type => DateTime
-  field :published, :type => Boolean
+  field :published, :type => Boolean, :default => false
   
   before_save :ensure_permalink
   before_save :set_published
