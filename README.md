@@ -19,6 +19,7 @@ Features
 
 Planned Features
 ----------------
+* Real time statistics
 * Admin encrypted using Heroku's free Piggyback SSL support
 * iPhone/iPad interface
 

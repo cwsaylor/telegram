@@ -1,3 +1,9 @@
+# TODO Convert to button tag and style
+# TODO Style admin bar
+# TODO Style headings
+# TODO Style errors
+# TODO Dynamic admin bar
+
 set :root, File.dirname(__FILE__)
 set :haml, :format => :html5
 
@@ -115,8 +121,8 @@ helpers do
     markdown(content)
   end
   
-  def cache_me
-    response.headers['Cache-Control'] = 'public, max-age=300'
+  def cache_me(length="300")
+    response.headers['Cache-Control'] = "public, max-age=#{length}"
   end
 end
 
@@ -173,25 +179,33 @@ get '/posts/new' do
   haml :'posts/new'
 end
 
-post '/posts' do
-  @post = Post.new params[:post]
-  if @post.save
-    redirect '/'
-  else
-    haml :'posts/new'
-  end
-end
-
 get '/posts/:id/edit' do
   @post = Post.find(params[:id])
   haml :'posts/edit'
+end
+
+post '/posts' do
+  @post = Post.new params[:post]
+  if @post.save
+    if @post.published?
+      redirect "/#{@post.permalink}"
+    else
+      redirect "/posts/#{@post.id}/edit"
+    end
+  else
+    haml :'posts/new'
+  end
 end
 
 put '/posts/:id' do
   @post = Post.find(params[:id])
   params[:post][:published] = false if params[:post][:published].nil? #checkboxes aren't submitted if they aren't checked
   if @post.update_attributes(params[:post])
-    redirect '/'
+    if @post.published?
+      redirect "/#{@post.permalink}"
+    else
+      redirect "/posts/#{@post.id}/edit"
+    end
   else
     haml :'posts/edit'
   end
