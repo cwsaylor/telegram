@@ -18,7 +18,8 @@
         %form{ :action => "/posts/#{@post.id}", :method => 'post', :class => "delete" }
           %input{ :type => 'hidden', :name => '_method', :value => 'delete' }
           %button{ :type => 'submit', :onClick => "return confirmDelete();" } Delete Post
-        %a{ :href => '/settings', :title => 'Settings' } Settings
+      %a{ :href => '/settings', :title => 'Settings' } Settings
+      %a{ :href => '/logout', :title => 'Logout' } Logout
 
 :javascript
   function readCookie(name) {

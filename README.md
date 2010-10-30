@@ -23,10 +23,10 @@ Planned Features
 * Admin encrypted using Heroku's free Piggyback SSL support
 * iPhone/iPad interface
 
-Warning
+Caveats
 -------
-Templates are currently being rendered directly from the database so don't
-allow access to your admin by someone you don't trust.
+* Templates are currently being rendered directly from the database so don't allow access to your admin by someone you don't trust.
+* You must close the browser after logging out. This is a limitation of HTTP Auth.
 
 Requirements
 ------------

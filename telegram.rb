@@ -83,7 +83,9 @@ end
 
 helpers do
   def protected!
-    unless authorized?
+    if authorized?
+      set_admin_cookie
+    else
       response['WWW-Authenticate'] = %(Basic realm="Authentication")
       throw(:halt, [401, "Not authorized\n"])
     end
@@ -138,11 +140,6 @@ before do
   @settings = Setting.first || Setting.create!
   template :layout do
     @settings.template_layout.to_s
-  end
-  if authorized?
-    set_admin_cookie
-  else
-    delete_admin_cookie
   end
 end
 
@@ -243,6 +240,11 @@ put '/settings' do
   else
     haml :'settings/index'
   end
+end
+
+get '/logout' do
+  delete_admin_cookie
+  redirect '/'
 end
 
 # This one must be last to get the really short url's
