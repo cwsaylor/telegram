@@ -1,5 +1,6 @@
 # TODO Convert to button tag and style
 # TODO Style admin bar
+# TODO Set admin cookie and show admin bar
 # TODO Style headings
 # TODO Style errors
 # TODO Dynamic admin bar
@@ -124,12 +125,24 @@ helpers do
   def cache_me(length="300")
     response.headers['Cache-Control'] = "public, max-age=#{length}"
   end
+  
+  def set_admin_cookie
+    response.set_cookie('tga', :path => '/', :value => Digest::MD5.hexdigest(@settings.username + @settings.password), :expires => (Time.now + (3600*24)))
+  end
+  def delete_admin_cookie
+    response.set_cookie('tga', :path => '/', :expires => (Time.now - (3600*24)))
+  end
 end
 
 before do
   @settings = Setting.first || Setting.create!
   template :layout do
     @settings.template_layout.to_s
+  end
+  if authorized?
+    set_admin_cookie
+  else
+    delete_admin_cookie
   end
 end
 

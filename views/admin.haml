@@ -6,8 +6,8 @@
     else
       return false;
   }
- 
-#admin
+
+#admin{ :style => 'display:none;'}
   .row
     .column.grid_12
       %a{ :href => '/', :title => 'Home' } Home
@@ -18,4 +18,20 @@
         %form{ :action => "/posts/#{@post.id}", :method => 'post', :class => "delete" }
           %input{ :type => 'hidden', :name => '_method', :value => 'delete' }
           %button{ :type => 'submit', :onClick => "return confirmDelete();" } Delete Post
-      %a{ :href => '/settings', :title => 'Settings' } Settings
+        %a{ :href => '/settings', :title => 'Settings' } Settings
+
+:javascript
+  function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+      var c = ca[i];
+      while (c.charAt(0)==' ') c = c.substring(1,c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+  }
+  if (readCookie('tga')) {
+    el = document.getElementById('admin');
+    el.style.display = 'block'
+  }

@@ -6,7 +6,7 @@
   %label{ :for => 'setting_password' } Password:
   %input{ :type => 'text', :name => 'setting[password]', :id => 'setting_password', :value => "#{@settings.password.to_s}" }
   %label{ :for => 'setting_feed_url' } Feed URL
-  %p (Default: #{default_feed_url}):
+  %p.hint (Default: #{default_feed_url}):
   %input{ :type => 'text', :name => 'setting[feed_url]', :id => 'setting_feed_url', :value => "#{@settings.feed_url.to_s}" }
   %h3 Delete contents to restore default template
   %label{ :for => 'setting_template_layout' } Layout Template:
