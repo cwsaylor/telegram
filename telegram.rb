@@ -1,9 +1,6 @@
-# TODO Convert to button tag and style
-# TODO Style admin bar
-# TODO Set admin cookie and show admin bar
-# TODO Style headings
 # TODO Style errors
-# TODO Dynamic admin bar
+# TODO Style links
+# TODO Style code
 
 set :root, File.dirname(__FILE__)
 set :haml, :format => :html5
@@ -60,6 +57,8 @@ class Setting
   include Mongoid::Document
   
   field :site_name,       :default => 'Telegram CMS'
+  field :meta_description,:default => 'This is my CMS'
+  field :meta_keywords,   :default => 'CMS, blog'
   field :username,        :default => 'admin'
   field :password,        :default => 'change_me'
   field :author,          :default => 'Me'
@@ -90,7 +89,7 @@ helpers do
       throw(:halt, [401, "Not authorized\n"])
     end
   end
-
+  
   def authorized?
     @auth ||=  Rack::Auth::Basic::Request.new(request.env)
     @auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == [@settings.username, @settings.password]
@@ -131,8 +130,17 @@ helpers do
   def set_admin_cookie
     response.set_cookie('tga', :path => '/', :value => Digest::MD5.hexdigest(@settings.username + @settings.password), :expires => (Time.now + (3600*24)))
   end
+  
   def delete_admin_cookie
     response.set_cookie('tga', :path => '/', :expires => (Time.now - (3600*24)))
+  end
+  
+  def meta_description
+    @post.blank? ? @settings.meta_description.to_s : @post.summary.to_s
+  end
+
+  def meta_keywords
+    @post.blank? ? @settings.meta_keywords.to_s : @post.keywords.to_s
   end
 end
 
@@ -179,14 +187,20 @@ end
 
 # Post Editing
 
-get '/posts/drafts' do
-  @posts = Post.where(:published => false).asc(:created_at)
-  haml :'posts/drafts'
+get '/posts' do
+  @drafts = Post.where(:published => false).desc(:created_at)
+  @posts  = Post.where(:published => true).desc(:published_at)
+  haml :'posts/index'
 end
 
 get '/posts/new' do
   @post = Post.new
   haml :'posts/new'
+end
+
+get '/posts/:id' do
+  @post = Post.find(params[:id])
+  haml @settings.template_post.to_s
 end
 
 get '/posts/:id/edit' do

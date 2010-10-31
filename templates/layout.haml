@@ -3,7 +3,8 @@
   %head
     %title= @settings.site_name.to_s
     %meta{ :charset => 'utf-8' }
-    %meta{ :name => 'description', :content => "" }
+    %meta{ :name => 'description', :content => "#{meta_description}" }
+    %meta{ :name => 'keywords', :content => "#{meta_keywords}" }
     %link{ :rel => 'stylesheet', :href => '/application.css' }
     %script{ :type => 'text/javascript', :charset => 'utf-8', :src => '/application.js' }
     %link{ :rel => "alternate",  :type => "application/atom+xml", :title => "#{@settings.site_name.to_s} Atom Feed", :href => "#{feed_url}" }

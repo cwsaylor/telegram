@@ -1,83 +1,111 @@
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, font, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	outline: 0;
-	font-size: 100%;
-	vertical-align: baseline;
-	background: transparent;
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
+blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em,
+font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
+b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table,
+caption, tbody, tfoot, thead, tr, th, td, button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
 }
 
 body {
-	line-height: 1;
-	font: 13px/1.5 'Helvetica Neue', Arial, 'Liberation Sans', FreeSans, sans-serif;
   background-color: #eee;
-  text-shadow: 1px 1px 0 #fff;
+  color: #222;
+  font-family: helvetica, "helvetica neue", "lucida grande", sans-serif;
 }
 
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
+h1, h2, h3, h4, h5, h6, p, table {
+  margin-bottom: 10px;
 }
 
-/* remember to define focus styles! */
-:focus {
-	outline: 0;
+h1 {
+  font-size: 2.0em;
+  text-shadow: white 0px 1px 0px;
 }
 
-/* remember to highlight inserts somehow! */
-ins {
-	text-decoration: none;
-}
-del {
-	text-decoration: line-through;
+h2 {
+  font-size: 1.5em;
+  text-shadow: white 0px 1px 0px;
 }
 
-/* tables still need 'cellspacing="0"' in the markup */
+h2 a {
+  text-decoration: none;
+}
+
+p {
+ text-shadow: 1px 1px 0 #fff;
+}
+
+p.summary, p.hint {
+  font-style: italic;
+  color: #666;
+}
+
+/* Tables */
+
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
 }
 
-form.delete {
-  display: inline;
+th {
+  border-bottom: 2px solid #ccc;
+  font-weight: bold;
+  text-align: left;
 }
 
-form.delete button{
-  border: none;
-  cursor: pointer;
-  background: transparent;
-  text-decoration: underline;
-  color: blue;
+td {
+  border-bottom: 1px solid #ddd;
 }
 
-input[type="text"] {
-  width: 99%;
-  display: block;
+caption, th, td {
+  padding: 4px 10px 4px 0;
 }
 
-textarea {
+caption {
+  background: #f1f1f1;
+  margin-bottom: 1em;
+  padding: 10px 0;
+}
+
+tr, td, th {
+  vertical-align: middle;
+}
+
+/* Forms */
+    
+label {
+  font-weight: bold;
+}
+
+input[type="text"], textarea {
   width: 99%;
   display: block;
 }
 
 input[type="submit"] {
   display: block;
+}
+
+form.delete, form.delete button {
+  display: inline;
+}
+
+form.delete button {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Admin */
+
+#admin {
+  background-color: #ccc;
+  padding: 5px 0;
 }
 
 /* ================ */
@@ -98,18 +126,18 @@ input[type="submit"] {
 .grid_12 { width:940px; }
 
 .column {
-	margin: 0 10px;
-	overflow: hidden;
-	float: left;
-	display: inline;
+  margin: 0 10px;
+  overflow: hidden;
+  float: left;
+  display: inline;
 }
 .row {
-	width: 960px;
-	margin: 0 auto;
-	overflow: hidden;
+  width: 960px;
+  margin: 0 auto;
+  overflow: hidden;
 }
 .row .row {
-	margin: 0 -10px;
-	width: auto;
-	display: inline-block;
+  margin: 0 -10px;
+  width: auto;
+  display: inline-block;
 }

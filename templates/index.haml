@@ -1,5 +1,5 @@
 - @posts.each do |post|
-  .post
-    %h2
-      %a{:href => "/#{post.permalink}"} #{post.title}
-    %p.summary= post.summary
+  %h2
+    %a{:href => "/#{post.permalink}"} #{post.title}
+  %p.summary= post.summary
+  %hr
