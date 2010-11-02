@@ -155,7 +155,7 @@ before do
   end
 end
 
-before '/posts/*' do
+before '/posts*' do
   protected!
 end
 
