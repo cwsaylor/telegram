@@ -37,6 +37,12 @@ Requirements
 * Builder
 * RDiscount
 
+Demo
+----
+You can view a demo here:
+[http://telegram.heroku.com](http://telegram.heroku.com)
+
+
 Installation
 ------------
 These instructions are for deploying to Heroku.
