@@ -1,7 +1,7 @@
 !!! 5
 %html{ :lang => "en"}
   %head
-    %title= @settings.site_name.to_s
+    %title= title
     %meta{ :charset => 'utf-8' }
     %meta{ :name => 'description', :content => "#{meta_description}" }
     %meta{ :name => 'keywords', :content => "#{meta_keywords}" }
@@ -13,7 +13,8 @@
     #header
       .row
         .column.grid_12
-          %h1= @settings.site_name.to_s
+          %h1
+            %a{ :href => '/', :title => "#{@settings.site_name.to_s}" }= @settings.site_name.to_s
     #content
       .row
         .column.grid_12

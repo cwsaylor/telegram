@@ -1,13 +1,13 @@
 Telegram
 ========
 
-Telegram is a minimalist blogging engine built on Sinatra and MongoDB,
-it is meant to easily be deployed to Heroku or any hosting system that 
-supports Rack.
+Telegram is a minimalist blogging engine built on Sinatra and MongoDB.
+Templates are created in Haml and writing is done in markdown.
+It is meant to easily be deployed to Heroku or any hosting system that 
+supports Rack. If you don't like Haml and Markdown, fork it.
 
 Features
 --------
-
 * Posts
 * Markdown
 * Drafts
@@ -39,5 +39,4 @@ Requirements
 
 Installation
 ------------
-
 These instructions are for deploying to Heroku.

@@ -1,7 +1,6 @@
 %h2 New Post
 - if @post.errors.any?
   #errors
-    %h3 Errors
     %ul
     - @post.errors.full_messages.each do |msg|
       %li= msg

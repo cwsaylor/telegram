@@ -1,7 +1,3 @@
-# TODO Style errors
-# TODO Style links
-# TODO Style code
-
 set :root, File.dirname(__FILE__)
 set :haml, :format => :html5
 
@@ -57,8 +53,8 @@ class Setting
   include Mongoid::Document
   
   field :site_name,       :default => 'Telegram CMS'
-  field :meta_description,:default => 'This is my CMS'
-  field :meta_keywords,   :default => 'CMS, blog'
+  field :meta_description,:default => 'Please change me to decribe your site in 160 characters or less.'
+  field :meta_keywords,   :default => 'your, site, keywords'
   field :username,        :default => 'admin'
   field :password,        :default => 'change_me'
   field :author,          :default => 'Me'
@@ -142,6 +138,14 @@ helpers do
   def meta_keywords
     @post.blank? ? @settings.meta_keywords.to_s : @post.keywords.to_s
   end
+  
+  def title
+    if @title.blank?
+      @post.blank? ? @settings.site_name.to_s : "#{@post.title} - #{@settings.site_name.to_s}"
+    else
+      "#{@title} - #{@settings.site_name.to_s}"
+    end
+  end
 end
 
 before do
@@ -188,22 +192,26 @@ end
 # Post Editing
 
 get '/posts' do
+  @title = "All Posts"
   @drafts = Post.where(:published => false).desc(:created_at)
   @posts  = Post.where(:published => true).desc(:published_at)
   haml :'posts/index'
 end
 
 get '/posts/new' do
+  @title = "New Post"
   @post = Post.new
   haml :'posts/new'
 end
 
 get '/posts/:id' do
   @post = Post.find(params[:id])
+  @title = "Preview Post (#{@post.title})"
   haml @settings.template_post.to_s
 end
 
 get '/posts/:id/edit' do
+  @title = "Edit Post"
   @post = Post.find(params[:id])
   haml :'posts/edit'
 end
@@ -244,6 +252,7 @@ end
 # Settings
 
 get '/settings' do
+  @title = "Settings"
   haml :'settings/index'
 end
 
