@@ -46,3 +46,13 @@ You can view a demo here:
 Installation
 ------------
 These instructions are for deploying to Heroku.
+
+    git clone git://github.com/cwsaylor/telegram.git
+    cd telegram
+    gem install heroku
+    heroku create
+    heroku addons:add mongohq:free
+    git push heroku master
+    heroku open
+    
+Browse to /settings and login with username 'admin' and password 'change_me' to setup your new CMS. 
