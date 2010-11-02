@@ -22,7 +22,7 @@ a, form.delete button {
   color: #D66639;
 }
 
-h1, h2, h3, h4, h5, h6, p, table {
+h1, h2, h3, h4, h5, h6, p, table, pre {
   margin-bottom: 10px;
 }
 
@@ -54,6 +54,18 @@ p.summary, p.hint {
   color: #666;
 }
 
+/* Code */
+
+pre, code {
+  background: #000;
+  color: #fff;
+  font: 'andale mono', 'monotype.com', 'lucida console', monospace;
+}
+
+pre {
+  padding: 10px;
+}
+  
 /* Tables */
 
 table {
@@ -115,6 +127,16 @@ form.delete button {
 #admin {
   background-color: #ccc;
   padding: 5px 0;
+}
+
+#errors {
+  background: #FBE3E4;
+  border-color: #FBC2C4;
+  color: #D12F19;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  padding: 0.8em;
+  margin-bottom: 10px;
 }
 
 /* ================ */
