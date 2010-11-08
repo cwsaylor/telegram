@@ -40,7 +40,7 @@ Requirements
 Demo
 ----
 You can view a demo here:
-[http://telegram.heroku.com](http://telegram.heroku.com)
+[http://www.telegramcms.com](http://www.telegramcms.com)
 
 
 Installation
@@ -55,4 +55,34 @@ These instructions are for deploying to Heroku.
     git push heroku master
     heroku open
     
-Browse to /settings and login with username 'admin' and password 'change_me' to setup your new CMS. 
+Browse to /settings and login with username 'admin' and password 'change_me' to setup your new CMS.
+
+Deploying to Multiple Heroku Apps from One Repository
+-----------------------------------------------------
+This is a pretty cool feature that I find very useful if you're managing multiple sites. You only
+need one repository using this trick, because all site Telegram site customizations are stored in
+the database.
+
+Assuming you've already performed the above steps and you have a heroku remote in your .git/config,
+let's setup another web site from this same repository.
+
+    heroku create my_new_app
+  
+Make a note of the git repository that is displayed after this command. We are about to use it.
+  
+You will now need to create this second remote manually. The easiest way to do that is to open 
+.git/config in your favorite text editor and duplicate the heroku remote entry and edit it like so...
+
+    [remote "my_new_app"]
+      url = git@heroku.com:my_new_app.git
+      fetch = +refs/heads/*:refs/remotes/heroku/*
+
+Note that you need to change the remote name and the url, which we noted above.
+
+To perform any heroku commands on this app, we just need to append '--app my_new_app' to the command
+
+    heroku info --app my_new_app
+    heroku addons:add custom_domains --app my_new_app
+
+
+
