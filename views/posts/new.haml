@@ -7,4 +7,5 @@
 
 %form{ :action => '/posts', :method => 'post' }
   = haml :'posts/_form', :layout => false, :locals => { :post => @post }
-  %input{ :type => 'submit', :name => 'Create', :value => 'Create' }
+  %div.buttons
+    %input{ :type => 'submit', :name => 'Create', :value => 'Create' }

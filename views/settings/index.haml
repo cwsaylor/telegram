@@ -1,31 +1,54 @@
 %h2 Edit Settings
 %form{ :action => "/settings", :method => 'post' }
   %input{ :type => 'hidden', :name => '_method', :value => 'put' }
-  %label{ :for => 'setting_site_name' } Site Name:
-  %input{ :type => 'text', :name => 'setting[site_name]', :id => 'setting_site_name', :value => "#{@settings.site_name.to_s}" }
-  %label{ :for => 'setting_username' } User Name:
-  %input{ :type => 'text', :name => 'setting[username]', :id => 'setting_username', :value => "#{@settings.username.to_s}" }
-  %label{ :for => 'setting_password' } Password:
-  %input{ :type => 'text', :name => 'setting[password]', :id => 'setting_password', :value => "#{@settings.password.to_s}" }
-  %label{ :for => 'setting_feed_url' } Feed URL
-  %input{ :type => 'text', :name => 'setting[feed_url]', :id => 'setting_feed_url', :value => "#{@settings.feed_url.to_s}" }
-  %p.hint Default: #{default_feed_url}
-  %label{ :for => 'setting_meta_description' } Meta Description for Home Page
-  %input{ :type => 'text', :name => 'setting[meta_description]', :id => 'setting_meta_description', :value => "#{@settings.meta_description.to_s}" }
-  %label{ :for => 'setting_meta_keywords' } Meta Keywords for Home Page
-  %input{ :type => 'text', :name => 'setting[meta_keywords]', :id => 'setting_meta_keywords', :value => "#{@settings.meta_keywords.to_s}" }
-  %label{ :for => 'setting_template_layout' } Layout Template:
-  %textarea{ :rows => '10', :cols => '80', :name => 'setting[template_layout]', :id => 'setting_template_layout' }  #{@settings.template_layout.to_s}
-  %p.hint Delete contents to restore default template
-  %label{ :for => 'setting_template_index' } Index Template:
-  %textarea{ :rows => '10', :cols => '80', :name => 'setting[template_index]', :id => 'setting_template_index' }  #{@settings.template_index.to_s}
-  %p.hint Delete contents to restore default template
-  %label{ :for => 'setting_template_post' } Post Template:
-  %textarea{ :rows => '10', :cols => '80', :name => 'setting[template_post]', :id => 'setting_template_post' }  #{@settings.template_post.to_s}
-  %p.hint Delete contents to restore default template
-  %label{ :for => 'setting_template_css' } Stylesheet:
-  %textarea{ :rows => '10', :cols => '80', :name => 'setting[template_css]', :id => 'setting_template_css' }  #{@settings.template_css.to_s}
-  %p.hint Delete contents to restore default template
-  %label{ :for => 'setting_template_js' } Javascript:
-  %textarea{ :rows => '10', :cols => '80', :name => 'setting[template_js]', :id => 'setting_template_js' }  #{@settings.template_js.to_s}
-  %input{ :type => 'submit', :name => 'Save', :value => 'Save' }
+  %div
+    %label{ :for => 'setting_site_name' } Site Name
+    %br
+    %input{ :type => 'text', :name => 'setting[site_name]', :id => 'setting_site_name', :value => "#{@settings.site_name.to_s}" }
+  %div
+    %label{ :for => 'setting_username' } User Name:
+    %br
+    %input{ :type => 'text', :name => 'setting[username]', :id => 'setting_username', :value => "#{@settings.username.to_s}" }
+  %div
+    %label{ :for => 'setting_password' } Password:
+    %br
+    %input{ :type => 'text', :name => 'setting[password]', :id => 'setting_password', :value => "#{@settings.password.to_s}" }
+  %div
+    %label{ :for => 'setting_feed_url' } Feed URL
+    %br
+    %input{ :type => 'text', :name => 'setting[feed_url]', :id => 'setting_feed_url', :value => "#{@settings.feed_url.to_s}" }
+    %p.hint Default: #{default_feed_url}
+  %div
+    %label{ :for => 'setting_meta_description' } Meta Description for Home Page
+    %br
+    %input{ :type => 'text', :name => 'setting[meta_description]', :id => 'setting_meta_description', :value => "#{@settings.meta_description.to_s}" }
+  %div
+    %label{ :for => 'setting_meta_keywords' } Meta Keywords for Home Page
+    %br
+    %input{ :type => 'text', :name => 'setting[meta_keywords]', :id => 'setting_meta_keywords', :value => "#{@settings.meta_keywords.to_s}" }
+  %div
+    %label{ :for => 'setting_template_layout' } Layout Template:
+    %br
+    %textarea{ :rows => '10', :cols => '80', :name => 'setting[template_layout]', :id => 'setting_template_layout' }  #{@settings.template_layout.to_s}
+    %p.hint Delete contents to restore default template
+  %div
+    %label{ :for => 'setting_template_index' } Index Template:
+    %br
+    %textarea{ :rows => '10', :cols => '80', :name => 'setting[template_index]', :id => 'setting_template_index' }  #{@settings.template_index.to_s}
+    %p.hint Delete contents to restore default template
+  %div
+    %label{ :for => 'setting_template_post' } Post Template:
+    %br
+    %textarea{ :rows => '10', :cols => '80', :name => 'setting[template_post]', :id => 'setting_template_post' }  #{@settings.template_post.to_s}
+    %p.hint Delete contents to restore default template
+  %div
+    %label{ :for => 'setting_template_css' } Stylesheet:
+    %br
+    %textarea{ :rows => '10', :cols => '80', :name => 'setting[template_css]', :id => 'setting_template_css' }  #{@settings.template_css.to_s}
+    %p.hint Delete contents to restore default template
+  %div
+    %label{ :for => 'setting_template_js' } Javascript:
+    %br
+    %textarea{ :rows => '10', :cols => '80', :name => 'setting[template_js]', :id => 'setting_template_js' }  #{@settings.template_js.to_s}
+  %div.buttons
+    %input{ :type => 'submit', :name => 'Save', :value => 'Save' }

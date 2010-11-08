@@ -1,12 +1,27 @@
-%label{ :for => 'post_title' } Title:
-%input{ :type => 'text', :name => 'post[title]', :id => 'post_title', :value => "#{post.title.to_s}" }
-%label{ :for => 'post_content' } Content:
-%textarea{ :rows => '20', :cols => '80', :name => 'post[content]', :id => 'post_content' } #{post.content.to_s}
-%label{ :for => 'post_permalink' } Permalink:
-%input{ :type => 'text', :name => 'post[permalink]', :id => 'post_permalink', :value => "#{post.permalink.to_s}" }
-%label{ :for => 'post_summary' } Summary:
-%input{ :type => 'text', :name => 'post[summary]', :id => 'post_summary', :value => "#{post.summary.to_s}" }
-%label{ :for => 'post_keywords' } Keywords:
-%input{ :type => 'text', :name => 'post[keywords]', :id => 'post_keywords', :value => "#{post.keywords.to_s}" }
-%input{ :type => 'checkbox', :name => 'post[published]', :id => 'post_published', :value => "1", :checked => post.published }
-%label{ :for => 'post_published' } Published
+%div
+  %label{ :for => 'post_title' } Title
+  %br
+  %input{ :type => 'text', :name => 'post[title]', :id => 'post_title', :value => "#{post.title.to_s}" }
+%div
+  %label{ :for => 'post_content' } Content
+  %br
+  %textarea{ :rows => '20', :cols => '80', :name => 'post[content]', :id => 'post_content' } #{post.content.to_s}
+%div
+  %label{ :for => 'post_permalink' } Permalink
+  %br
+  %input{ :type => 'text', :name => 'post[permalink]', :id => 'post_permalink', :value => "#{post.permalink.to_s}" }
+%div
+  %label{ :for => 'post_summary' } Summary
+  %br
+  %input{ :type => 'text', :name => 'post[summary]', :id => 'post_summary', :value => "#{post.summary.to_s}" }
+%div
+  %label{ :for => 'post_keywords' } Keywords
+  %br
+  %input{ :type => 'text', :name => 'post[keywords]', :id => 'post_keywords', :value => "#{post.keywords.to_s}" }
+%div
+  %input{ :type => 'checkbox', :name => 'post[published]', :id => 'post_published', :value => "1", :checked => post.published }
+  %label{ :for => 'post_published' } Published
+%div
+  %label{ :for => 'post_published_at' } Published On
+  %br
+  %input{ :type => 'datetime', :name => 'post[published_at]', :id => 'post_published_at', :value => "#{post.published_at.to_s}" }
