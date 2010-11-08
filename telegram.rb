@@ -254,7 +254,11 @@ end
 
 get '/settings' do
   @title = "Settings"
-  haml :'settings/index'
+  begin
+    haml :'settings/index'
+  rescue => Haml::SyntaxError
+    haml :'settings/index', :layout => false
+  end
 end
 
 put '/settings' do
