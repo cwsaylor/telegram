@@ -22,7 +22,7 @@ a, form.delete button {
   color: #D66639;
 }
 
-h1, h2, h3, h4, h5, h6, p, table, pre, ul, form div {
+h1, h2, h3, h4, h5, h6, p, table, pre, ul, ol, dl, form div {
   margin-bottom: 10px;
 }
 
@@ -52,6 +52,35 @@ p {
 p.summary, p.hint {
   font-style: italic;
   color: #666;
+}
+
+/* Lists */
+
+ul, ol {
+  list-style-position: inside;
+}
+
+ul {
+  list-style-type: disc;
+}
+
+ol {
+  list-style-type: decimal;
+}
+
+dl dt {
+  font-weight: bold;
+}
+
+dl dd {
+  margin-bottom: 0em; }
+
+dd {
+  margin-left: 0.5em; }
+
+li {
+	margin-left: 1em;
+  line-height: 1.4;
 }
 
 /* Code */
