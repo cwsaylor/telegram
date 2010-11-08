@@ -22,7 +22,7 @@ a, form.delete button {
   color: #D66639;
 }
 
-h1, h2, h3, h4, h5, h6, p, table, pre {
+h1, h2, h3, h4, h5, h6, p, table, pre, ul, form div {
   margin-bottom: 10px;
 }
 
@@ -106,11 +106,6 @@ label {
 
 input[type="text"], textarea {
   width: 99%;
-  display: block;
-}
-
-input[type="submit"] {
-  display: block;
 }
 
 form.delete, form.delete button {
