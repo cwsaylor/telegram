@@ -58,6 +58,7 @@ class Setting
   field :username,        :default => 'admin'
   field :password,        :default => 'change_me'
   field :author,          :default => 'Me'
+  field :google_analytics_id
   field :feed_url
   field :template_layout
   field :template_index

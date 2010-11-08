@@ -24,3 +24,4 @@
       .row
         .column.grid_12
           %p= "&copy; 2010 #{@settings.site_name.to_s}"
+    = haml(:google, :layout => false) unless @settings.google_analytics_id.blank?

@@ -19,6 +19,11 @@
     %input{ :type => 'text', :name => 'setting[feed_url]', :id => 'setting_feed_url', :value => "#{@settings.feed_url.to_s}" }
     %p.hint Default: #{default_feed_url}
   %div
+    %label{ :for => 'setting_google_analytics_id' } Google Analytics ID
+    %br
+    %input{ :type => 'text', :name => 'setting[google_analytics_id]', :id => 'setting_google_analytics_id', :value => "#{@settings.google_analytics_id.to_s}" }
+    %p.hint Hint: UA-XXXXXX-X
+  %div
     %label{ :for => 'setting_meta_description' } Meta Description for Home Page
     %br
     %input{ :type => 'text', :name => 'setting[meta_description]', :id => 'setting_meta_description', :value => "#{@settings.meta_description.to_s}" }
