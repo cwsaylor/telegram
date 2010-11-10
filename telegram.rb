@@ -178,6 +178,12 @@ get '/feed' do
   builder :feed, :layout => false
 end
 
+get '/sitemap.xml' do
+  cache_me
+  @posts = Post.where(:published => true)
+  builder :sitemap, :layout => false
+end
+
 get '/application.js' do
   cache_me
   content_type :js, :charset => 'utf-8'
