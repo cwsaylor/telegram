@@ -1,0 +1,169 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
+blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em,
+font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
+b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table,
+caption, tbody, tfoot, thead, tr, th, td, button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+body {
+  background-color: #eee;
+  color: #222;
+  font-family: helvetica, "helvetica neue", "lucida grande", sans-serif;
+}
+
+a, form.delete button {
+  color: #D66639;
+}
+
+h1, h2, h3, h4, h5, h6, p, table, pre, ul, form div {
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-size: 2.0em;
+  text-shadow: white 0px 1px 0px;
+}
+
+h1 a {
+  color: black;
+  text-decoration: none;
+}
+
+h2 {
+  font-size: 1.5em;
+  text-shadow: white 0px 1px 0px;
+}
+
+h2 a {
+  text-decoration: none;
+}
+
+p {
+ text-shadow: 1px 1px 0 #fff;
+}
+
+p.summary, p.hint {
+  font-style: italic;
+  color: #666;
+}
+
+/* Code */
+
+pre, code {
+  background: #000;
+  color: #fff;
+  font: 'andale mono', 'monotype.com', 'lucida console', monospace;
+}
+
+pre {
+  padding: 10px;
+}
+  
+/* Tables */
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+
+th {
+  border-bottom: 2px solid #ccc;
+  font-weight: bold;
+  text-align: left;
+}
+
+td {
+  border-bottom: 1px solid #ddd;
+}
+
+caption, th, td {
+  padding: 4px 10px 4px 0;
+}
+
+caption {
+  background: #f1f1f1;
+  margin-bottom: 1em;
+  padding: 10px 0;
+}
+
+tr, td, th {
+  vertical-align: middle;
+}
+
+/* Forms */
+    
+label {
+  font-weight: bold;
+}
+
+input[type="text"], textarea {
+  width: 99%;
+}
+
+form.delete, form.delete button {
+  display: inline;
+}
+
+form.delete button {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Admin */
+
+#admin {
+  background-color: #ccc;
+  padding: 5px 0;
+}
+
+#errors {
+  background: #FBE3E4;
+  border-color: #FBC2C4;
+  color: #D12F19;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  padding: 0.8em;
+  margin-bottom: 10px;
+}
+
+/* ================ */
+/* = The 1Kb Grid = */     /* 12 columns, 60 pixels each, with 20 pixel gutter */
+/* ================ */
+
+.grid_1 { width:60px; }
+.grid_2 { width:140px; }
+.grid_3 { width:220px; }
+.grid_4 { width:300px; }
+.grid_5 { width:380px; }
+.grid_6 { width:460px; }
+.grid_7 { width:540px; }
+.grid_8 { width:620px; }
+.grid_9 { width:700px; }
+.grid_10 { width:780px; }
+.grid_11 { width:860px; }
+.grid_12 { width:940px; }
+
+.column {
+  margin: 0 10px;
+  overflow: hidden;
+  float: left;
+  display: inline;
+}
+.row {
+  width: 960px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.row .row {
+  margin: 0 -10px;
+  width: auto;
+  display: inline-block;
+}

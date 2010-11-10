@@ -23,5 +23,8 @@
     #footer
       .row
         .column.grid_12
-          %p= "&copy; 2010 #{@settings.site_name.to_s}"
+          %hr
+          %p
+            = "&copy; 2010 #{@settings.site_name.to_s}. Powered by" 
+            %a{ :href => "http://www.telegramcms.com" } Telegram CMS.
     = haml(:google, :layout => false) unless @settings.google_analytics_id.blank?

@@ -1,33 +1,41 @@
 %h2 Drafts
-%table
-  %tr
-    %th{ :width => "65%"} Title
-    %th Created At
-    %th &nbsp;
-    - @drafts.each do |post|
-      %tr
-        %td
-          %a{:href => "/posts/#{post.id}/edit" }= post.title
-        %td= post.created_at.strftime("%Y-%m-%d %I:%M %p")
-        %td
-          %a{:href => "/posts/#{post.id}" } Preview
-          %form{ :action => "/posts/#{post.id}", :method => 'post', :class => "delete" }
-            %input{ :type => 'hidden', :name => '_method', :value => 'delete' }
-            %button{ :type => 'submit', :onClick => "return confirmDelete();" } Delete
+- if @drafts.any?
+  %table
+    %tr
+      %th{ :width => "65%"} Title
+      %th Created At
+      %th &nbsp;
+      - @drafts.each do |post|
+        %tr
+          %td
+            %a{:href => "/posts/#{post.id}/edit" }= post.title
+          %td= post.created_at.strftime("%Y-%m-%d %I:%M %p")
+          %td
+            %a{:href => "/posts/#{post.id}" } Preview
+            %form{ :action => "/posts/#{post.id}", :method => 'post', :class => "delete" }
+              %input{ :type => 'hidden', :name => '_method', :value => 'delete' }
+              %button{ :type => 'submit', :onClick => "return confirmDelete();" } Delete
+- else
+  %p
+    No Drafts. 
+    %a{ :href => '/posts/new' } Click here to create one.
 
 %h2 Published
-%table
-  %tr
-    %th{ :width => "65%"} Title
-    %th Published At
-    %th &nbsp;
-    - @posts.each do |post|
-      %tr
-        %td
-          %a{:href => "/posts/#{post.id}/edit" }= post.title
-        %td= post.published_at.strftime("%Y-%m-%d %I:%M %p")
-        %td
-          %a{:href => "/#{post.permalink}" } View
-          %form{ :action => "/posts/#{post.id}", :method => 'post', :class => "delete" }
-            %input{ :type => 'hidden', :name => '_method', :value => 'delete' }
-            %button{ :type => 'submit', :onClick => "return confirmDelete();" } Delete
+-  if @posts.any?
+  %table
+    %tr
+      %th{ :width => "65%"} Title
+      %th Published At
+      %th &nbsp;
+      - @posts.each do |post|
+        %tr
+          %td
+            %a{:href => "/posts/#{post.id}/edit" }= post.title
+          %td= post.published_at.strftime("%Y-%m-%d %I:%M %p")
+          %td
+            %a{:href => "/#{post.permalink}" } View
+            %form{ :action => "/posts/#{post.id}", :method => 'post', :class => "delete" }
+              %input{ :type => 'hidden', :name => '_method', :value => 'delete' }
+              %button{ :type => 'submit', :onClick => "return confirmDelete();" } Delete
+- else
+  %p You haven't published any posts yet.
