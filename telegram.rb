@@ -247,7 +247,7 @@ end
 delete '/posts/:id' do
   @post = Post.find(params[:id])
   @post.destroy
-  redirect '/'
+  redirect '/posts'
 end
 
 # Settings
