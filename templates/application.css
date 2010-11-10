@@ -128,7 +128,18 @@ tr, td, th {
 }
 
 /* Forms */
-    
+
+fieldset {
+  background: #ddd;
+  border: 1px solid #e3e3e3;
+  margin: 0 0 1.5em 0;
+  padding: 1.5em 1.5em 1em 1.5em;
+}
+
+legend {
+  font-weight: bold;
+}
+
 label {
   font-weight: bold;
 }
