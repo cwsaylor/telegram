@@ -6,6 +6,10 @@
     %br
     %input{ :type => 'text', :name => 'setting[site_name]', :id => 'setting_site_name', :value => "#{@settings.site_name.to_s}" }
   %div
+    %label{ :for => 'setting_author' } Author
+    %br
+    %input{ :type => 'text', :name => 'setting[author]', :id => 'setting_author', :value => "#{@settings.author.to_s}" }
+  %div
     %label{ :for => 'setting_username' } User Name:
     %br
     %input{ :type => 'text', :name => 'setting[username]', :id => 'setting_username', :value => "#{@settings.username.to_s}" }
