@@ -65,6 +65,7 @@ class Setting
   field :template_post
   field :template_css
   field :template_js
+  field :template_robots
   
   before_save :ensure_templates
   
@@ -74,6 +75,7 @@ class Setting
     self.template_post   = IO.read(File.dirname(__FILE__)+'/templates/post.haml') if self.template_post.blank?
     self.template_css    = IO.read(File.dirname(__FILE__)+'/templates/application.css') if self.template_css.blank?
     self.template_js     = IO.read(File.dirname(__FILE__)+'/templates/application.js') if self.template_js.blank?
+    self.template_robots = IO.read(File.dirname(__FILE__)+'/templates/robots.txt') if self.template_robots.blank?
   end
 end 
 
@@ -194,6 +196,12 @@ get '/application.css' do
   cache_me
   content_type :css, :charset => 'utf-8'
   @settings.template_css.to_s
+end
+
+get '/robots.txt' do
+  cache_me
+  content_type :text
+  @settings.template_robots.to_s
 end
 
 # Post Editing

@@ -38,28 +38,32 @@
   %fieldset
     %legend Templates
     %div
-      %label{ :for => 'setting_template_layout' } Layout Template:
+      %label{ :for => 'setting_template_layout' } Layout Template
       %br
       %textarea{ :rows => '10', :cols => '80', :name => 'setting[template_layout]', :id => 'setting_template_layout' }  #{@settings.template_layout.to_s}
       %p.hint Delete contents to restore default template
     %div
-      %label{ :for => 'setting_template_index' } Index Template:
+      %label{ :for => 'setting_template_index' } Index Template
       %br
       %textarea{ :rows => '10', :cols => '80', :name => 'setting[template_index]', :id => 'setting_template_index' }  #{@settings.template_index.to_s}
       %p.hint Delete contents to restore default template
     %div
-      %label{ :for => 'setting_template_post' } Post Template:
+      %label{ :for => 'setting_template_post' } Post Template
       %br
       %textarea{ :rows => '10', :cols => '80', :name => 'setting[template_post]', :id => 'setting_template_post' }  #{@settings.template_post.to_s}
       %p.hint Delete contents to restore default template
     %div
-      %label{ :for => 'setting_template_css' } Stylesheet:
+      %label{ :for => 'setting_template_css' } Styleshee
       %br
       %textarea{ :rows => '10', :cols => '80', :name => 'setting[template_css]', :id => 'setting_template_css' }  #{@settings.template_css.to_s}
       %p.hint Delete contents to restore default template
     %div
-      %label{ :for => 'setting_template_js' } Javascript:
+      %label{ :for => 'setting_template_js' } Javascript
       %br
       %textarea{ :rows => '10', :cols => '80', :name => 'setting[template_js]', :id => 'setting_template_js' }  #{@settings.template_js.to_s}
+    %div
+      %label{ :for => 'setting_template_robots' } Robots
+      %br
+      %textarea{ :rows => '10', :cols => '80', :name => 'setting[template_robots]', :id => 'setting_template_robots' }  #{@settings.template_robots.to_s}
   %div.buttons
     %input{ :type => 'submit', :name => 'Save', :value => 'Save' }
