@@ -1,4 +1,6 @@
-%h2 Edit Post
+%h2
+  Edit Post
+  %a{:href => "/posts/#{@post.id}", :target => "_blank" } (Preview)
 - if @post.errors.any?
   #errors
     %ul
