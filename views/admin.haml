@@ -15,6 +15,7 @@
       %a{ :href => '/posts/new', :title => 'New Post' } New Post
       - if ! @post.blank? && ! @post.new_record?
         %a{:href => "/posts/#{@post.id}/edit" } Edit Post
+      %a{ :href => '/assets', :title => 'Assets' } Assets
       %a{ :href => '/settings', :title => 'Settings' } Settings
       %a{ :href => '/logout', :title => 'Logout' } Logout
 

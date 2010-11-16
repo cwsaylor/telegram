@@ -1,0 +1,50 @@
+%h2 Edit asset
+- if @asset.errors.any?
+  #errors
+    %ul
+    - @asset.errors.full_messages.each do |msg|
+      %li= msg
+
+%form{ :action => "/assets/#{@asset.id}", :method => 'post' }
+  %input{ :type => 'hidden', :name => '_method', :value => 'put' }
+  %div
+    %a{ :href => "#{@asset.file.url}", :target => "_blank" }
+      %img{ :src => "#{@asset.file.thumb.url}" }
+  %div
+    %label{ :for => 'asset_name' } Name
+    %br
+    %input{ :type => 'text', :name => 'asset[name]', :id => 'asset_name', :value => "#{@asset.name.to_s}" }
+  %div.buttons
+    %input{ :type => 'submit', :name => 'Save', :value => 'Save' }
+%hr
+%h2 Embed Markdown
+%div
+  %label{ :for => "embed_html" } Full
+  %br
+  %textarea{ :rows => '2', :cols => '80', :name => 'embed_html', :id => 'embed_html' } ![#{@asset.name}](#{@asset.file.url})
+%div
+  %label{ :for => "embed_html" } Thumb
+  %br
+  %textarea{ :rows => '2', :cols => '80', :name => 'embed_html', :id => 'embed_html' } ![#{@asset.name}](#{@asset.file.thumb.url})
+%div
+  %label{ :for => "embed_html" } Thumb linked to Full
+  %br
+  %textarea{ :rows => '2', :cols => '80', :name => 'embed_html', :id => 'embed_html' } [![#{@asset.name}](#{@asset.file.thumb.url})](#{@asset.file.url})
+%hr
+  %h2 Embed HTML
+  %div
+    %label{ :for => "embed_html" } Full
+    %br
+    %textarea{ :rows => '2', :cols => '80', :name => 'embed_html', :id => 'embed_html' }
+      %img{ :src => "#{@asset.file.url}", :alt => "#{@asset.name}" }>
+  %div
+    %label{ :for => "embed_html" } Thumb
+    %br
+    %textarea{ :rows => '2', :cols => '80', :name => 'embed_html', :id => 'embed_html' }
+      %img{ :src => "#{@asset.file.thumb.url}", :alt => "#{@asset.name}" }>
+  %div
+    %label{ :for => "embed_html" } Thumb linked to Full
+    %br
+    %textarea{ :rows => '2', :cols => '80', :name => 'embed_html', :id => 'embed_html' }
+      %a{ :href => "#{@asset.file.url}", :target => "_blank" }
+        %img{ :src => "#{@asset.file.thumb.url}", :alt => "#{@asset.name}" }>

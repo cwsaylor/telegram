@@ -6,3 +6,6 @@ gem "bson_ext", "1.1.1"
 gem 'haml'
 gem 'builder'
 gem 'rdiscount'
+gem 'fog'
+gem 'carrierwave'
+gem 'rmagick'

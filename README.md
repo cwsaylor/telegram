@@ -11,6 +11,7 @@ Features
 * Posts
 * Markdown
 * Drafts
+* Assets
 * Atom Feed
 * Single author
 * Pretty permalinks
@@ -36,6 +37,8 @@ Requirements
 * Haml
 * Builder
 * RDiscount
+* Carrierwave
+* An S3 account to use the asset uploader
 
 Demo
 ----
@@ -45,13 +48,14 @@ You can view a demo here:
 
 Installation
 ------------
-These instructions are for deploying to Heroku.
+These instructions are for deploying to Heroku. Replace xxxx below with appropriate S3 parameters.
 
     git clone git://github.com/cwsaylor/telegram.git
     cd telegram
     gem install heroku
     heroku create
     heroku addons:add mongohq:free
+    heroku config:add S3_KEY=xxxx S3_SECRET=xxxx S3_BUCKET=xxxx
     git push heroku master
     heroku open
     
@@ -83,6 +87,7 @@ To perform any heroku commands on this app, we just need to append '--app my_new
 
     heroku info --app my_new_app
     heroku addons:add custom_domains --app my_new_app
+    heroku config:add S3_KEY=xxxx S3_SECRET=xxxx S3_BUCKET=xxxx --app my_new_app
 
 
 

@@ -1,0 +1,19 @@
+%h2 Upload asset
+- if @asset.errors.any?
+  #errors
+    %ul
+    - @asset.errors.full_messages.each do |msg|
+      %li= msg
+
+%form{ :action => '/assets', :method => 'post', :enctype => 'multipart/form-data', :'accept-charset' => "UTF-8" }
+  %div
+    %label{ :for => 'asset_name' } Name
+    %br
+    %input{ :type => 'text', :name => 'asset[name]', :id => 'asset_name', :value => "#{@asset.name.to_s}" }
+  %div
+    %label{ :for => 'asset_file' } File
+    %br
+    %input{ :type => 'file', :name => 'asset[file]', :id => 'asset_file' }
+    %input{ :type => 'hidden', :name => 'asset[file_cache]', :value => "#{@asset.file_cache.to_s}" }
+  %div.buttons
+    %input{ :type => 'submit', :name => 'Upload', :value => 'Upload' }

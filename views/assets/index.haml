@@ -1,0 +1,24 @@
+%h2 Assets
+- if @assets.any?
+  %table
+    %tr
+      %th
+      %th{ :width => "65%"} Name
+      %th Created At
+      %th &nbsp;
+      - @assets.each do |asset|
+        %tr
+          %td
+            %a{ :href => "#{asset.file.url}", :target => "_blank" }
+              %img{ :src => "#{asset.file.thumb.url}" }
+          %td
+            %a{:href => "/assets/#{asset.id}/edit" }= asset.name
+          %td= asset.created_at.strftime("%Y-%m-%d %I:%M %p")
+          %td
+            %form{ :action => "/assets/#{asset.id}", :method => 'post', :class => "delete" }
+              %input{ :type => 'hidden', :name => '_method', :value => 'delete' }
+              %button{ :type => 'submit', :onClick => "return confirmDelete();" } Delete
+- else
+  %p
+    No assets. 
+    %a{ :href => '/assets/new' } Click here to upload one.

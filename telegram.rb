@@ -1,3 +1,5 @@
+require 'carrierwave/orm/mongoid'
+
 set :root, File.dirname(__FILE__)
 set :haml, :format => :html5
 
@@ -9,6 +11,12 @@ configure do
   Mongoid.configure do |config|
     config.from_hash(mongoid_settings[ENV['RACK_ENV']])
   end
+  
+  CarrierWave.configure do |config|
+     config.s3_access_key_id     = ENV['S3_KEY']
+     config.s3_secret_access_key = ENV['S3_SECRET']
+     config.s3_bucket            = ENV['S3_BUCKET']
+   end
 end
 
 # Models
@@ -78,6 +86,31 @@ class Setting
     self.template_robots = IO.read(File.dirname(__FILE__)+'/templates/robots.txt') if self.template_robots.blank?
   end
 end 
+
+class AssetUploader < CarrierWave::Uploader::Base
+  include CarrierWave::RMagick
+  storage :s3
+  
+  def cache_dir
+    "#{File.dirname(__FILE__)}/tmp/uploads"
+  end
+  
+  def store_dir
+    "assets/#{model.id}"
+  end
+  
+  version :thumb do
+    process :resize_to_fit => [100,100]
+  end
+end
+
+class Asset
+  include Mongoid::Document
+  include Mongoid::Timestamps
+  field :name
+  field :file
+  mount_uploader :file, AssetUploader
+end
 
 helpers do
   def protected!
@@ -163,6 +196,10 @@ before '/posts*' do
 end
 
 before '/settings' do
+  protected!
+end
+
+before '/assets' do
   protected!
 end
 
@@ -262,6 +299,50 @@ delete '/posts/:id' do
   @post = Post.find(params[:id])
   @post.destroy
   redirect '/posts'
+end
+
+# Assets
+
+get '/assets' do
+  @title = "Assets"
+  @assets = Asset.all
+  haml :'assets/index'
+end
+
+get '/assets/new' do
+  @title = "New asset"
+  @asset = Asset.new
+  haml :'/assets/new'
+end
+
+get '/assets/:id/edit' do
+  @title = "Edit Asset"
+  @asset = Asset.find(params[:id])
+  haml :'assets/edit'
+end
+
+post '/assets' do
+  @asset = Asset.new params[:asset]
+  if @asset.save
+    redirect "/assets"
+  else
+    haml :'assets/new'
+  end
+end
+
+put '/assets/:id' do
+  @asset = Asset.find(params[:id])
+  if @asset.update_attributes(params[:asset])
+    redirect "/assets/#{@post.id}/edit"
+  else
+    haml :'assets/edit'
+  end
+end
+
+delete '/assets/:id' do
+  @asset = Asset.find(params[:id])
+  @asset.destroy
+  redirect '/assets'
 end
 
 # Settings
