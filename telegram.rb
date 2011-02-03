@@ -191,9 +191,9 @@ before do
   end
 end
 
-before '/posts*' do
-  protected!
-end
+# before '/posts*' do
+#   protected!
+# end
 
 before '/settings' do
   protected!
@@ -244,6 +244,7 @@ end
 # Post Editing
 
 get '/posts' do
+  protected!
   @title = "All Posts"
   @drafts = Post.where(:published => false).desc(:created_at)
   @posts  = Post.where(:published => true).desc(:published_at)
@@ -251,6 +252,7 @@ get '/posts' do
 end
 
 get '/posts/new' do
+  protected!
   @title = "New Post"
   @post = Post.new
   haml :'posts/new'
@@ -263,12 +265,14 @@ get '/posts/:id' do
 end
 
 get '/posts/:id/edit' do
+  protected!
   @title = "Edit Post"
   @post = Post.find(params[:id])
   haml :'posts/edit'
 end
 
 post '/posts' do
+  protected!
   @post = Post.new params[:post]
   if @post.save
     if @post.published?
@@ -282,6 +286,7 @@ post '/posts' do
 end
 
 put '/posts/:id' do
+  protected!
   @post = Post.find(params[:id])
   params[:post][:published] = false if params[:post][:published].nil? #checkboxes aren't submitted if they aren't checked
   if @post.update_attributes(params[:post])
@@ -296,6 +301,7 @@ put '/posts/:id' do
 end
 
 delete '/posts/:id' do
+  protected!
   @post = Post.find(params[:id])
   @post.destroy
   redirect '/posts'
